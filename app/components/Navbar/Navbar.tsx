@@ -1,35 +1,24 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { AiFillBug } from "react-icons/ai";
-import classnames from "classnames";
+import { Container, Flex } from "@radix-ui/themes";
 
-import { navbarLabels } from "./variables";
+import { AiFillBug } from "react-icons/ai";
+import { NavLinks } from "./NavLinks";
+import { AuthStatus } from "./AuthStatus";
 
 export const Navbar = () => {
-  const currentPath = usePathname();
-
   return (
-    <nav className="flex space-x-10 mb-5 px-5 h-14 items-center shadow-md">
-      <Link href="/">
-        <AiFillBug size={32} />
-      </Link>
-      <ul className="flex space-x-6">
-        {navbarLabels.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={classnames({
-              "text-zinc-500 hover:text-zinc-800 transition-colors py-3": true,
-              "text-zinc-800 border-b-2 border-zinc-800":
-                link.href === currentPath,
-            })}
-          >
-            {link.label}
-          </Link>
-        ))}
-      </ul>
+    <nav className="border-b mb-5 px-5 py-3">
+      <Container>
+        <Flex justify="between">
+          <Flex align="center" gap="3">
+            <Link href="/">
+              <AiFillBug />
+            </Link>
+            <NavLinks />
+          </Flex>
+          <AuthStatus />
+        </Flex>
+      </Container>
     </nav>
   );
 };
